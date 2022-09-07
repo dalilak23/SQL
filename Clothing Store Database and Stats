@@ -1,0 +1,28 @@
+-Create a clothing store database
+
+CREATE TABLE store (id INTEGER PRIMARY KEY, item_name TEXT, price INTEGER, number_sold INTEGER, location INTEGER, color TEXT);
+
+INSERT INTO store VALUES (1, "Shirt", 55, 15, 9, "blue");
+INSERT INTO store VALUES (2, "Shorts", 150, 8, 2, "yellow");
+INSERT INTO store VALUES (3, "Pants", 225, 2, 3, "pink");
+INSERT INTO store VALUES (4, "Gloves", 66, 1, 9, "red");
+INSERT INTO store VALUES (5, "Hat", 99, 0, 2, "purple");
+INSERT INTO store VALUES (6, "Bikini Top", 60, 3, 5, "orange");
+INSERT INTO store VALUES (7, "Bikini Bottom", 62, 3, 4, "orange");
+INSERT INTO store VALUES (8, "Purse", 300, 1, 13, "green");
+INSERT INTO store VALUES (9, "Belt", 100, 5, 11, "black");
+INSERT INTO store VALUES (10, "Heels", 287, 2, 8, "white");
+INSERT INTO store VALUES (11, "Sneakers", 325, 99, 4, "grey");
+INSERT INTO store VALUES (12, "Flip Flops", 48, 4, 2, "magenta");
+INSERT INTO store VALUES (13, "Boots", 199, 8, 1, "pink");
+INSERT INTO store VALUES (14, "Jacket", 226, 3, 3, "fuschia");
+INSERT INTO store VALUES (15, "Bracelet", 45, 7, 4, "burgundy");
+
+-display the database ordered by price. 
+SELECT * FROM store ORDER BY price asc;
+
+-Which products sold over ten items?
+SELECT * FROM store WHERE number_sold > 10;
+
+-what was the maximum number of a single item sold?
+SELECT MAX(number_sold) FROM store; 
