@@ -1,0 +1,66 @@
+--Climate Conference Project
+--Database: https://www.db-fiddle.com/f/pxMci1sLL945KHKYvpe9W6/1
+
+--LEFT JOIN: Provide a list of all events and the VIPs speaking at each one, as well as any VIPs attending the climate conference who are not scheduled to speak.
+
+SELECT 
+vips.first_name,
+vips.last_name, 
+events.event_name
+FROM vips
+LEFT JOIN events
+ON vips.event = events.event_id
+ORDER BY events.event_name;
+
+-- RIGHT JOIN: List all VIPs scheduled to speak, along with the type of event they are speaking at.
+
+SELECT 
+vips.first_name,
+vips.last_name, 
+events.event_type
+FROM vips
+RIGHT JOIN events
+ON vips.event = events.event_id
+ORDER BY events.event_name;
+
+-- INNER JOIN: Show the members that have been a member since 2008 and the type of event they’re associated with.
+
+SELECT vips.first_name,
+vips.last_name,
+vips.member_since,
+events.event_type
+FROM vips
+INNER JOIN events
+ON vips.event = events.event_id
+WHERE member_since <= 2008
+;
+
+-- Multiples JOINs: Retrieve the names of members in the education sector, along with their dinner RSVP status and the name and address of the hotel where they are staying.
+
+SELECT vips.first_name,
+vips.last_name,
+hotels.hotel_name,
+hotels.address
+FROM vips
+JOIN reservations
+ON vips.member_id = reservations.member_id
+JOIN hotels
+ON reservations.hotel = hotels.hotel_id
+WHERE assoc_type = 'education'
+AND dinner_rsvp = 1;
+
+-- SELF JOIN: Find VIPs who provide feedback to others and the corresponding VIPs who receive their feedback.
+
+SELECT v1.first_name AS feedback_giver, v1.last_name AS giver_last, 
+       v2.first_name AS feedback_receiver, v2.last_name AS receiver_last
+FROM vips v1
+JOIN vips v2 ON v1.provides_feedback_to = v2.member_id;
+
+-- SUB QUERY: Retrieve the names of VIPs who have submitted a welcome RSVP.
+
+SELECT first_name, last_name
+FROM vips
+WHERE member_id IN
+(SELECT member_id FROM reservations WHERE welcome_rsvp = 1);
+
+
